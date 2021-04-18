@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Cinedix</string>
+    <!-- Pantalla Main -->
+    <string name="et_name">Nombre</string>
+    <string name="et_password">Contraseña</string>
+    <string name="btn_login">Iniciar sesión</string>
+    <string name="tv_signin">¿No tienes una cuenta? Pincha aqui!</string>
+
+    <!-- Pantalla SignInActivity -->
+    <string name="et_email">Email</string>
+    <string name="et_repeatpassword">Repetir contraseña</string>
+    <string name="btn_signin">Crear cuenta</string>
+    <string name="btn_signIn_back">¿Ya tienes cuenta? Pincha aqui!</string>
+    <string name="logo_image">logo</string>
+    <string name="title_activity_dashboard">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+
+</resources>
