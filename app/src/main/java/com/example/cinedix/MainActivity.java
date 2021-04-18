@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void clickListener() {
         tvSignIn.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
     }
 
     private void relations() {
@@ -46,7 +47,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tvSignIn:
                 goToSignIn();
                 break;
+            case R.id.btnLogin:
+                goToDashboard();
+                break;
         }
+    }
+
+    private void goToDashboard() {
+        Intent i = new Intent(this, DashboardActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private void goToSignIn() {

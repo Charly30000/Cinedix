@@ -55,4 +55,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         startActivity(i);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.goToMain();
+    }
 }
