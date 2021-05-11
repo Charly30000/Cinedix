@@ -1,7 +1,8 @@
-package com.example.cinedix;
+package com.example.cinedix.ui;
 
 import android.os.Bundle;
 
+import com.example.cinedix.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
