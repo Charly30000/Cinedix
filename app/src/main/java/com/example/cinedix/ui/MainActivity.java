@@ -93,13 +93,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (response.isSuccessful()) {
                         Toast.makeText(MainActivity.this, "Sesion iniciada correctamente", Toast.LENGTH_SHORT).show();
 
-                        SharedPreferencesManager.setSomeStringValue(Constantes.PREF_TOKEN, response.body().getToken());
-                        SharedPreferencesManager.setSomeStringValue(Constantes.PREF_USERNAME, response.body().getUser().getUsername());
-                        SharedPreferencesManager.setSomeStringValue(Constantes.PREF_AUTHORITY, response.body().getUser().getAuthorities().get(0).getAuthority());
-                        SharedPreferencesManager.setSomeBooleanValue(Constantes.PREF_ACCOUNT_NON_EXPIRED, response.body().getUser().getAccountNonExpired());
-                        SharedPreferencesManager.setSomeBooleanValue(Constantes.PREF_ACCOUNT_NON_LOCKED, response.body().getUser().getAccountNonLocked());
-                        SharedPreferencesManager.setSomeBooleanValue(Constantes.PREF_CREDENTIALS_NON_EXPIRED, response.body().getUser().getCredentialsNonExpired());
-                        SharedPreferencesManager.setSomeBooleanValue(Constantes.PREF_ENABLED, response.body().getUser().getEnabled());
+                        SharedPreferencesManager
+                                .setSomeStringValue(Constantes.PREF_TOKEN, response.body().getToken());
+                        SharedPreferencesManager
+                                .setSomeStringValue(Constantes.PREF_USERNAME, response.body().getUser().getUsername());
+                        SharedPreferencesManager
+                                .setSomeStringValue(Constantes.PREF_AUTHORITY,
+                                        response.body().getUser().getAuthorities().get(0).getAuthority());
+                        SharedPreferencesManager
+                                .setSomeBooleanValue(Constantes.PREF_ACCOUNT_NON_EXPIRED,
+                                        response.body().getUser().getAccountNonExpired());
+                        SharedPreferencesManager
+                                .setSomeBooleanValue(Constantes.PREF_ACCOUNT_NON_LOCKED,
+                                        response.body().getUser().getAccountNonLocked());
+                        SharedPreferencesManager
+                                .setSomeBooleanValue(Constantes.PREF_CREDENTIALS_NON_EXPIRED,
+                                        response.body().getUser().getCredentialsNonExpired());
+                        SharedPreferencesManager
+                                .setSomeBooleanValue(Constantes.PREF_ENABLED, response.body().getUser().getEnabled());
 
                         Intent i = new Intent(MainActivity.this, DashboardActivity.class);
                         startActivity(i);

@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResponseAuth {
 
-    @SerializedName("mensaje")
+    @SerializedName("message")
     @Expose
-    private String mensaje;
+    private String message;
     @SerializedName("user")
     @Expose
     private User user;
@@ -25,23 +25,23 @@ public class ResponseAuth {
 
     /**
      * 
-     * @param mensaje
+     * @param message
      * @param user
      * @param token
      */
-    public ResponseAuth(String mensaje, User user, String token) {
+    public ResponseAuth(String message, User user, String token) {
         super();
-        this.mensaje = mensaje;
+        this.message = message;
         this.user = user;
         this.token = token;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public User getUser() {
