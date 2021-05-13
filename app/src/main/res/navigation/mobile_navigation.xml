@@ -9,13 +9,13 @@
         android:id="@+id/navigation_cartelera"
         android:name="com.example.cinedix.ui.dashboardFragments.cartelera.CarteleraFragment"
         android:label="@string/title_cartelera"
-        tools:layout="@layout/fragment_cartelera" />
+        tools:layout="@layout/fragment_cartelera_list" />
 
     <fragment
-        android:id="@+id/navigation_entradas"
-        android:name="com.example.cinedix.ui.dashboardFragments.entradas.EntradasFragment"
+        android:id="@+id/navigation_entrada"
+        android:name="com.example.cinedix.ui.dashboardFragments.entrada.EntradaFragment"
         android:label="@string/title_entradas"
-        tools:layout="@layout/fragment_entradas" />
+        tools:layout="@layout/fragment_entrada_list" />
 
     <fragment
         android:id="@+id/navigation_perfil"
@@ -24,8 +24,8 @@
         tools:layout="@layout/fragment_perfil" />
 
     <fragment
-        android:id="@+id/navigation_estrenos"
-        android:name="com.example.cinedix.ui.dashboardFragments.estrenos.EstrenosFragment"
+        android:id="@+id/navigation_estreno"
+        android:name="com.example.cinedix.ui.dashboardFragments.estreno.EstrenoFragment"
         android:label="@string/title_estrenos"
-        tools:layout="@layout/fragment_estrenos" />
+        tools:layout="@layout/fragment_estreno_list" />
 </navigation>

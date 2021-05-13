@@ -7,7 +7,7 @@
         android:title="@string/title_cartelera" />
 
     <item
-        android:id="@+id/navigation_entradas"
+        android:id="@+id/navigation_entrada"
         android:icon="@drawable/ic_baseline_sticky_note_2_24"
         android:title="@string/title_entradas" />
 
@@ -17,7 +17,7 @@
         android:title="@string/title_perfil" />
 
     <item
-        android:id="@+id/navigation_estrenos"
+        android:id="@+id/navigation_estreno"
         android:icon="@drawable/ic_baseline_hourglass_empty_24"
         android:title="@string/title_estrenos" />
 </menu>

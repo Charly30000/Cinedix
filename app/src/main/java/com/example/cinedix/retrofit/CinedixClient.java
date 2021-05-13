@@ -1,6 +1,9 @@
 package com.example.cinedix.retrofit;
 
+import androidx.room.Room;
+
 import com.example.cinedix.common.Constantes;
+import com.example.cinedix.common.MyApp;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -12,6 +15,8 @@ public class CinedixClient {
     private Retrofit retrofit;
 
     public CinedixClient() {
+
+        // Remote > Retrofit
         retrofit = new Retrofit.Builder()
                 .baseUrl(Constantes.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

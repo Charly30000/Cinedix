@@ -11,8 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cinedix.R;
-import com.example.cinedix.models.request.RequestSignup;
-import com.example.cinedix.models.response.ResponseAuth;
+import com.example.cinedix.retrofit.request.RequestSignup;
+import com.example.cinedix.retrofit.response.ResponseAuth;
 import com.example.cinedix.retrofit.CinedixClient;
 import com.example.cinedix.retrofit.CinedixService;
 

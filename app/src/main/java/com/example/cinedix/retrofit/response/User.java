@@ -1,5 +1,5 @@
 
-package com.example.cinedix.models.response;
+package com.example.cinedix.retrofit.response;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

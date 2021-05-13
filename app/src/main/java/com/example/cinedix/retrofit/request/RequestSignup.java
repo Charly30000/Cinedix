@@ -1,5 +1,5 @@
 
-package com.example.cinedix.models.request;
+package com.example.cinedix.retrofit.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

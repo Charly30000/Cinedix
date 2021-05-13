@@ -10,12 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cinedix.ui.DashboardActivity;
 import com.example.cinedix.R;
 import com.example.cinedix.common.Constantes;
 import com.example.cinedix.common.SharedPreferencesManager;
-import com.example.cinedix.models.request.RequestLogin;
-import com.example.cinedix.models.response.ResponseAuth;
+import com.example.cinedix.retrofit.request.RequestLogin;
+import com.example.cinedix.retrofit.response.ResponseAuth;
 import com.example.cinedix.retrofit.CinedixClient;
 import com.example.cinedix.retrofit.CinedixService;
 
