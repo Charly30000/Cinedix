@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,18 @@ public class EntradaRecyclerViewAdapter extends RecyclerView.Adapter<EntradaRecy
         holder.tvEntradaSitiosOcupados.setText(sitiosOcupadosString);
         String codigo = holder.mItem.getCodigo();
         holder.tvEntradaCodigo.setText("Codigo: " + codigo);
+        holder.tvEntradaEstado.setText("Estado: " + holder.mItem.getEstado());
+        switch (holder.mItem.getEstado()) {
+            case Constantes.ENTRADA_PAGADO:
+                holder.tvEntradaEstado.setTextColor(Color.GREEN);
+                break;
+            case Constantes.ENTRADA_PROCESANDO:
+                holder.tvEntradaEstado.setTextColor(0xFFF39C12);
+                break;
+            case Constantes.ENTRADA_CANCELADO:
+                holder.tvEntradaEstado.setTextColor(Color.RED);
+                break;
+        }
         //QrCode
         MultiFormatWriter writer = new MultiFormatWriter();
         try {
@@ -91,6 +104,7 @@ public class EntradaRecyclerViewAdapter extends RecyclerView.Adapter<EntradaRecy
         public final TextView tvEntradaCine;
         public final TextView tvEntradaSitiosOcupados;
         public final TextView tvEntradaCodigo;
+        public final TextView tvEntradaEstado;
         public final ImageView ivEntradaQRCode;
         public Entrada mItem;
 
@@ -102,6 +116,7 @@ public class EntradaRecyclerViewAdapter extends RecyclerView.Adapter<EntradaRecy
             tvEntradaCine = view.findViewById(R.id.tvEntradaCine);
             tvEntradaSitiosOcupados = view.findViewById(R.id.tvEntradaSitiosOcupados);
             tvEntradaCodigo = view.findViewById(R.id.tvEntradaCodigo);
+            tvEntradaEstado = view.findViewById(R.id.tvEntradaEstado);
             ivEntradaQRCode = view.findViewById(R.id.ivEntradaQRCode);
 
         }

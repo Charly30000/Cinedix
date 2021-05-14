@@ -12,4 +12,9 @@ public class Constantes {
     public static final String PREF_CREDENTIALS_NON_EXPIRED = "PREF_CREDENTIALS_NON_EXPIRED";
     public static final String PREF_ENABLED = "PREF_ENABLED";
 
+    // Estados entradas
+    public static final String ENTRADA_PAGADO = "pagado";
+    public static final String ENTRADA_PROCESANDO = "procesando";
+    public static final String ENTRADA_CANCELADO = "cancelado";
+
 }
