@@ -82,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (username.isEmpty() || !(username.length() >= 5 && username.length() <= 30)) {
             etUsername.setError("Debe de tener entre 5 y 30 caracteres");
             return;
-        } else if (email.isEmpty()) {
+        } else if (email.isEmpty() || !email.matches("\\w+@\\w+\\.\\w+")) {
             etEmail.setError("Debes de introducir un Email");
             return;
         } else if (password.isEmpty() || !(password.length() >= 8 && password.length() <= 60)) {

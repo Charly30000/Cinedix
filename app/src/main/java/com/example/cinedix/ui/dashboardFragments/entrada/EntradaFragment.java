@@ -11,29 +11,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.cinedix.R;
-import com.example.cinedix.ui.dashboardFragments.entrada.dummy.DummyContent;
+import com.example.cinedix.models.entity.Entrada;
+import com.example.cinedix.retrofit.AuthEntradasClient;
+import com.example.cinedix.retrofit.AuthEntradasService;
 
-/**
- * A fragment representing a list of Items.
- */
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class EntradaFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
+    List<Entrada> entradasList;
+    EntradaRecyclerViewAdapter adapter;
+    RecyclerView recyclerView;
+    AuthEntradasClient authEntradasClient;
+    AuthEntradasService authEntradasService;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public EntradaFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static EntradaFragment newInstance(int columnCount) {
         EntradaFragment fragment = new EntradaFragment();
         Bundle args = new Bundle();
@@ -59,14 +62,43 @@ public class EntradaFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new EntradaRecyclerViewAdapter(DummyContent.ITEMS));
+
+            retrofitInit();
+            loadCarteleraData();
+
         }
         return view;
+    }
+
+    private void retrofitInit() {
+        authEntradasClient = AuthEntradasClient.getInstance();
+        authEntradasService = authEntradasClient.getAuthEntradasService();
+    }
+
+    private void loadCarteleraData() {
+        Call<List<Entrada>> call = authEntradasService.getEntradas();
+        call.enqueue(new Callback<List<Entrada>>() {
+            @Override
+            public void onResponse(Call<List<Entrada>> call, Response<List<Entrada>> response) {
+                if (response.isSuccessful()) {
+                    entradasList = response.body();
+                    adapter = new EntradaRecyclerViewAdapter(getActivity(), entradasList);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getActivity(), "Algo ha ido mal", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Entrada>> call, Throwable t) {
+                Toast.makeText(getActivity(), "No tienes conexion a internet", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

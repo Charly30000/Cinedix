@@ -11,4 +11,7 @@ public interface AuthPeliculasService {
 
     @GET("api/clientes/peliculas/venta")
     Call<List<Pelicula>> getPeliculasCartelera();
+
+    @GET("api/clientes/peliculas/estrenos")
+    Call<List<Pelicula>> getPeliculasEstreno();
 }

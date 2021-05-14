@@ -69,7 +69,7 @@ public class CarteleraFragment extends Fragment {
             } else {
                 DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
                 float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-                int numColumnas = (int) dpWidth / 160;
+                int numColumnas = (int) dpWidth / 180;
                 recyclerView.setLayoutManager(new GridLayoutManager(context, numColumnas));
             }
             retrofitInit();

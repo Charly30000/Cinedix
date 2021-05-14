@@ -2,26 +2,28 @@ package com.example.cinedix.ui.dashboardFragments.estreno;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.cinedix.R;
-import com.example.cinedix.ui.dashboardFragments.estreno.dummy.DummyContent.DummyItem;
+import com.example.cinedix.common.Constantes;
+import com.example.cinedix.models.entity.Pelicula;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class EstrenoRecyclerViewAdapter extends RecyclerView.Adapter<EstrenoRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Pelicula> mValues;
+    private Context ctx;
 
-    public EstrenoRecyclerViewAdapter(List<DummyItem> items) {
+    public EstrenoRecyclerViewAdapter(Context context, List<Pelicula> items) {
         mValues = items;
+        ctx = context;
     }
 
     @Override
@@ -34,8 +36,13 @@ public class EstrenoRecyclerViewAdapter extends RecyclerView.Adapter<EstrenoRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.tvTituloEstreno.setText(holder.mItem.getNombre());
+        String rutaImagen = holder.mItem.getRutaImagen();
+        if (!rutaImagen.equals("")) {
+            Glide.with(ctx)
+                    .load(Constantes.BASE_URL + "uploads/" + rutaImagen)
+                    .into(holder.ivEstreno);
+        }
     }
 
     @Override
@@ -45,20 +52,20 @@ public class EstrenoRecyclerViewAdapter extends RecyclerView.Adapter<EstrenoRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final ImageView ivEstreno;
+        public final TextView tvTituloEstreno;
+        public Pelicula mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            ivEstreno = (ImageView) view.findViewById(R.id.ivEstreno);
+            tvTituloEstreno = (TextView) view.findViewById(R.id.tvTituloEstreno);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString();
         }
     }
 }

@@ -8,32 +8,36 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.cinedix.R;
-import com.example.cinedix.ui.dashboardFragments.estreno.dummy.DummyContent;
+import com.example.cinedix.models.entity.Pelicula;
+import com.example.cinedix.retrofit.AuthPeliculasClient;
+import com.example.cinedix.retrofit.AuthPeliculasService;
 
-/**
- * A fragment representing a list of Items.
- */
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class EstrenoFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private int mColumnCount = 2;
+    List<Pelicula> peliculasList;
+    EstrenoRecyclerViewAdapter adapter;
+    RecyclerView recyclerView;
+    AuthPeliculasService authPeliculasService;
+    AuthPeliculasClient authPeliculasClient;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public EstrenoFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static EstrenoFragment newInstance(int columnCount) {
         EstrenoFragment fragment = new EstrenoFragment();
         Bundle args = new Bundle();
@@ -59,14 +63,47 @@ public class EstrenoFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+                float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+                int numColumnas = (int) dpWidth / 180;
+                recyclerView.setLayoutManager(new GridLayoutManager(context, numColumnas));
             }
-            recyclerView.setAdapter(new EstrenoRecyclerViewAdapter(DummyContent.ITEMS));
+
+            retrofitInit();
+            loadEstrenoData();
         }
         return view;
+    }
+
+    private void retrofitInit() {
+        authPeliculasClient = AuthPeliculasClient.getInstance();
+        authPeliculasService = authPeliculasClient.getAuthPeliculasService();
+    }
+
+    private void loadEstrenoData() {
+        Call<List<Pelicula>> call = authPeliculasService.getPeliculasEstreno();
+        call.enqueue(new Callback<List<Pelicula>>() {
+            @Override
+            public void onResponse(Call<List<Pelicula>> call, Response<List<Pelicula>> response) {
+                if (response.isSuccessful()) {
+                    peliculasList = response.body();
+                    adapter = new EstrenoRecyclerViewAdapter(getActivity(), peliculasList);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getActivity(), "Algo ha ido mal", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Pelicula>> call, Throwable t) {
+                Toast.makeText(getActivity(), "No hay conexion a internet", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }

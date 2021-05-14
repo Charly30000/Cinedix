@@ -17,5 +17,12 @@
     <string name="title_entradas">Entradas</string>
     <string name="title_perfil">Perfil</string>
     <string name="title_estrenos">Estrenos</string>
+    <string name="title_activity_qr_code">QrCodeActivity</string>
+
+    <!-- Pantalla Perfil -->
+    <string name="old_password">Contraseña antigua</string>
+    <string name="new_password">Contraseña nueva</string>
+    <string name="repeat_new_password">Repetir contraseña nueva</string>
+    <string name="btn_modify_profile">Modificar perfil</string>
 
 </resources>
