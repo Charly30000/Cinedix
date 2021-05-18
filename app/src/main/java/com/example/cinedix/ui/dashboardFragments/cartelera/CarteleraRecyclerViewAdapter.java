@@ -1,8 +1,10 @@
 package com.example.cinedix.ui.dashboardFragments.cartelera;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.cinedix.R;
 import com.example.cinedix.common.Constantes;
 import com.example.cinedix.models.entity.Pelicula;
+import com.example.cinedix.ui.BuyPeliculaActivity;
 
 import java.util.List;
 
@@ -45,6 +48,15 @@ public class CarteleraRecyclerViewAdapter extends RecyclerView.Adapter<Cartelera
                     .into(holder.ivCartelera);
         }
 
+        holder.cvCarteleraPelicula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ctx, BuyPeliculaActivity.class);
+                i.putExtra("pelicula", holder.mItem);
+                ctx.startActivity(i);
+            }
+        });
+
     }
 
     @Override
@@ -56,6 +68,7 @@ public class CarteleraRecyclerViewAdapter extends RecyclerView.Adapter<Cartelera
         public final View mView;
         public final ImageView ivCartelera;
         public final TextView tvTituloCartelera;
+        public final CardView cvCarteleraPelicula;
         public Pelicula mItem;
 
         public ViewHolder(View view) {
@@ -63,6 +76,7 @@ public class CarteleraRecyclerViewAdapter extends RecyclerView.Adapter<Cartelera
             mView = view;
             ivCartelera = (ImageView) view.findViewById(R.id.ivCartelera);
             tvTituloCartelera = (TextView) view.findViewById(R.id.tvTituloCartelera);
+            cvCarteleraPelicula = (CardView) view.findViewById(R.id.cvCarteleraPelicula);
         }
 
         @Override

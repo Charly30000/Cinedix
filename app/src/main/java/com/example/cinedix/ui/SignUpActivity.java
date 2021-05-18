@@ -22,11 +22,11 @@ import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText etUsername, etEmail, etPassword, etRepeatPassword;
-    Button btnSignUp;
-    TextView tvBack;
-    CinedixClient cinedixClient;
-    CinedixService cinedixService;
+    private EditText etUsername, etEmail, etPassword, etRepeatPassword;
+    private Button btnSignUp;
+    private TextView tvBack;
+    private CinedixClient cinedixClient;
+    private CinedixService cinedixService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

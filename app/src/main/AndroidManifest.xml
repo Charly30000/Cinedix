@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cinedix">
-        <activity android:name=".ui.QrCodeActivity"></activity>
+        <activity android:name=".ui.BuyPeliculaActivity"></activity>
+        <activity android:name=".ui.QrCodeActivity" />
         <activity
             android:name=".ui.DashboardActivity"
             android:label="@string/title_activity_dashboard" />

@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.cinedix.R;
+import com.example.cinedix.common.Constantes;
+import com.example.cinedix.common.SharedPreferencesManager;
 import com.example.cinedix.models.entity.Usuario;
 import com.example.cinedix.retrofit.AuthUsuarioClient;
 import com.example.cinedix.retrofit.AuthUsuarioService;
@@ -25,9 +27,9 @@ import retrofit2.Response;
 
 public class PerfilFragment extends Fragment implements View.OnClickListener {
 
-    Usuario usuario;
-    AuthUsuarioClient authUsuarioClient;
-    AuthUsuarioService authUsuarioService;
+    private Usuario usuario;
+    private AuthUsuarioClient authUsuarioClient;
+    private AuthUsuarioService authUsuarioService;
 
     private TextView tvPerfilNombre;
     private EditText etPerfilEmail;
@@ -136,6 +138,8 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                     if (response.isSuccessful()) {
+                        SharedPreferencesManager
+                                .setSomeStringValue(Constantes.PREF_USERNAME, nuevoUsuario.getUsername());
                         Toast.makeText(getActivity(), "Usuario modificado correctamente!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getActivity(), "Ha ocurrido un error inesperado", Toast.LENGTH_SHORT).show();

@@ -28,11 +28,11 @@ public class EntradaFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
-    List<Entrada> entradasList;
-    EntradaRecyclerViewAdapter adapter;
-    RecyclerView recyclerView;
-    AuthEntradasClient authEntradasClient;
-    AuthEntradasService authEntradasService;
+    private List<Entrada> entradasList;
+    private EntradaRecyclerViewAdapter adapter;
+    private RecyclerView recyclerView;
+    private AuthEntradasClient authEntradasClient;
+    private AuthEntradasService authEntradasService;
 
     public EntradaFragment() {
     }

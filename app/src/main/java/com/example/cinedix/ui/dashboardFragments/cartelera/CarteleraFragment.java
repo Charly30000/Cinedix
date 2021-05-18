@@ -29,11 +29,11 @@ public class CarteleraFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 2;
-    List<Pelicula> peliculasList;
-    CarteleraRecyclerViewAdapter adapter;
-    RecyclerView recyclerView;
-    AuthPeliculasService authPeliculasService;
-    AuthPeliculasClient authPeliculasClient;
+    private List<Pelicula> peliculasList;
+    private CarteleraRecyclerViewAdapter adapter;
+    private RecyclerView recyclerView;
+    private AuthPeliculasService authPeliculasService;
+    private AuthPeliculasClient authPeliculasClient;
 
     public CarteleraFragment() {
     }

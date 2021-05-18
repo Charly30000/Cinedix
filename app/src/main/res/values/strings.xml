@@ -25,4 +25,7 @@
     <string name="repeat_new_password">Repetir contraseña nueva</string>
     <string name="btn_modify_profile">Modificar perfil</string>
 
+    <!-- Pantalla BuyPeliculaActivity -->
+    <string name="btn_buy_pelicula">Comprar entrada</string>
+
 </resources>

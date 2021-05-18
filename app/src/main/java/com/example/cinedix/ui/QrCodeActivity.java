@@ -19,8 +19,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class QrCodeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView ivQrCode;
-    TextView tvCodigo;
+    private ImageView ivQrCode;
+    private TextView tvCodigo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
