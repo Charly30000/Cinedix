@@ -89,16 +89,29 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tvPrecioTotal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayoutCheckboxes"
+                app:layout_constraintStart_toStartOf="@+id/linearLayoutCheckboxes"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCheckboxes" />
+
             <Button
                 android:id="@+id/btnSubmit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/btn_buy_pelicula"
                 android:textColor="@color/background"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayoutCheckboxes"
-                app:layout_constraintStart_toStartOf="@+id/linearLayoutCheckboxes"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCheckboxes" />
+                app:layout_constraintEnd_toEndOf="@+id/tvPrecioTotal"
+                app:layout_constraintStart_toStartOf="@+id/tvPrecioTotal"
+                app:layout_constraintTop_toBottomOf="@+id/tvPrecioTotal" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

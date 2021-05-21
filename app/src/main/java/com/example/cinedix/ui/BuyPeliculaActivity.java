@@ -2,6 +2,8 @@ package com.example.cinedix.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.cinedix.R;
 import com.example.cinedix.common.Constantes;
+import com.example.cinedix.models.entity.GenericResponse;
 import com.example.cinedix.models.entity.Pelicula;
 import com.example.cinedix.models.entity.SesionPelicula;
 import com.example.cinedix.models.entity.SesionPeliculaRequest;
@@ -34,7 +37,7 @@ import retrofit2.Response;
 public class BuyPeliculaActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView ivPoster;
-    private TextView tvTitulo, tvDescripcion;
+    private TextView tvTitulo, tvDescripcion, tvPrecioTotal;
     private Spinner spinnerSeleccionarCine, spinnerSeleccionarHora;
     private LinearLayout linearLayoutCheckboxes;
     private Button btnSubmit;
@@ -104,6 +107,7 @@ public class BuyPeliculaActivity extends AppCompatActivity implements View.OnCli
                     linearLayoutCheckboxes.requestLayout();
                     linearLayoutCheckboxes.invalidate();
                     asientosSeleccionados.clear();
+                    tvPrecioTotal.setText("Precio: " + String.format("%.2f", Constantes.PRECIO_ENTRADA * asientosSeleccionados.size()) + " €");
                 }
             }
 
@@ -145,6 +149,8 @@ public class BuyPeliculaActivity extends AppCompatActivity implements View.OnCli
                             linearLayoutCheckboxes.addView(cb);
                         }
                     }
+                } else {
+                    tvPrecioTotal.setText("Precio: " + String.format("%.2f", Constantes.PRECIO_ENTRADA * asientosSeleccionados.size()) + " €");
                 }
             }
 
@@ -154,6 +160,7 @@ public class BuyPeliculaActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void putData(Pelicula p) {
+        tvPrecioTotal.setText("Precio: 0.00 €");
         tvTitulo.setText(p.getNombre());
         tvDescripcion.setText(p.getDescripcion());
         if (!p.getRutaImagen().equals("")) {
@@ -213,6 +220,7 @@ public class BuyPeliculaActivity extends AppCompatActivity implements View.OnCli
         spinnerSeleccionarCine = findViewById(R.id.spinnerSeleccionarCine);
         spinnerSeleccionarHora = findViewById(R.id.spinnerSeleccionarHora);
         linearLayoutCheckboxes = findViewById(R.id.linearLayoutCheckboxes);
+        tvPrecioTotal = findViewById(R.id.tvPrecioTotal);
         btnSubmit = findViewById(R.id.btnSubmit);
     }
 
@@ -244,12 +252,16 @@ public class BuyPeliculaActivity extends AppCompatActivity implements View.OnCli
                     entrada = new SesionPeliculaRequest(sp.getId(), asientosSeleccionados);
                 }
             }
-            Call<SesionPeliculaRequest> call = authSesionPeliculaService.comprarEntrada(entrada);
-            call.enqueue(new Callback<SesionPeliculaRequest>() {
+            Call<GenericResponse> call = authSesionPeliculaService.comprarEntrada(entrada);
+            call.enqueue(new Callback<GenericResponse>() {
                 @Override
-                public void onResponse(Call<SesionPeliculaRequest> call, Response<SesionPeliculaRequest> response) {
+                public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(BuyPeliculaActivity.this, "Pelicula comprada, revise sus entradas\nMuchas gracias!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BuyPeliculaActivity.this, "Procesando, ve al navegador para completar el pago", Toast.LENGTH_SHORT).show();
+                        Uri link = Uri.parse(Constantes.BASE_URL_BANCO +
+                                "cinedix/transaccion/sendtobank?codigo=" + response.body().getCodigo());
+                        Intent i = new Intent(Intent.ACTION_VIEW, link);
+                        startActivity(i);
                         finish();
                     } else {
                         Toast.makeText(BuyPeliculaActivity.this, "Ha ocurrido un error inesperado, vuelva a intentarlo por favor", Toast.LENGTH_SHORT).show();
@@ -258,7 +270,7 @@ public class BuyPeliculaActivity extends AppCompatActivity implements View.OnCli
                 }
 
                 @Override
-                public void onFailure(Call<SesionPeliculaRequest> call, Throwable t) {
+                public void onFailure(Call<GenericResponse> call, Throwable t) {
                     Toast.makeText(BuyPeliculaActivity.this, "No tienes conexion a internet", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -277,5 +289,6 @@ public class BuyPeliculaActivity extends AppCompatActivity implements View.OnCli
         } else {
             asientosSeleccionados.remove(new Integer(asiento));
         }
+        tvPrecioTotal.setText("Precio: " + String.format("%.2f", Constantes.PRECIO_ENTRADA * asientosSeleccionados.size()) + " €");
     }
 }

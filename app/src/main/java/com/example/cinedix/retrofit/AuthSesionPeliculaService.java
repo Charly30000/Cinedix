@@ -1,5 +1,6 @@
 package com.example.cinedix.retrofit;
 
+import com.example.cinedix.models.entity.GenericResponse;
 import com.example.cinedix.models.entity.SesionPelicula;
 import com.example.cinedix.models.entity.SesionPeliculaRequest;
 
@@ -20,5 +21,5 @@ public interface AuthSesionPeliculaService {
     public Call<List<SesionPelicula>> getSesionesPeliculasHoras(@Path("cineid") Long cineid, @Path("peliculaid") Long peliculaid);
 
     @POST("api/clientes/entradas/crear")
-    public Call<SesionPeliculaRequest> comprarEntrada(@Body SesionPeliculaRequest sesionPelicula);
+    public Call<GenericResponse> comprarEntrada(@Body SesionPeliculaRequest sesionPelicula);
 }
