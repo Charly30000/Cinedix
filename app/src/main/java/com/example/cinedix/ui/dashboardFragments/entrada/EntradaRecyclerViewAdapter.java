@@ -1,11 +1,13 @@
 package com.example.cinedix.ui.dashboardFragments.entrada;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +92,19 @@ public class EntradaRecyclerViewAdapter extends RecyclerView.Adapter<EntradaRecy
             }
         });
 
+        holder.cardViewEntrada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.mItem.getEstado().equals(Constantes.ENTRADA_PROCESANDO)) {
+                    Uri link = Uri.parse(Constantes.BASE_URL_BANCO +
+                            "cinedix/transaccion/sendtobank?codigo=" + codigo);
+                    Intent i = new Intent(Intent.ACTION_VIEW, link);
+                    ctx.startActivity(i);
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -106,6 +121,7 @@ public class EntradaRecyclerViewAdapter extends RecyclerView.Adapter<EntradaRecy
         public final TextView tvEntradaCodigo;
         public final TextView tvEntradaEstado;
         public final ImageView ivEntradaQRCode;
+        public final CardView cardViewEntrada;
         public Entrada mItem;
 
         public ViewHolder(View view) {
@@ -118,6 +134,7 @@ public class EntradaRecyclerViewAdapter extends RecyclerView.Adapter<EntradaRecy
             tvEntradaCodigo = view.findViewById(R.id.tvEntradaCodigo);
             tvEntradaEstado = view.findViewById(R.id.tvEntradaEstado);
             ivEntradaQRCode = view.findViewById(R.id.ivEntradaQRCode);
+            cardViewEntrada = view.findViewById(R.id.cardViewEntrada);
 
         }
 
