@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onFailure(Call<ResponseAuth> call, Throwable t) {
                     Toast.makeText(MainActivity.this,
-                            "Problemas de conexion. Intentelo de nuevo", Toast.LENGTH_SHORT).show();
+                            "Problemas de conexion. Intentelo de nuevo: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
