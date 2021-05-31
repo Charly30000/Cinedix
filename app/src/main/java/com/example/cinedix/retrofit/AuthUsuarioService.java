@@ -1,6 +1,6 @@
 package com.example.cinedix.retrofit;
 
-import com.example.cinedix.models.entity.Pelicula;
+import com.example.cinedix.models.entity.ModificarUsuario;
 import com.example.cinedix.models.entity.Usuario;
 
 import java.util.List;
@@ -16,5 +16,5 @@ public interface AuthUsuarioService {
     Call<Usuario> getUsuario();
 
     @PUT("api/clientes/usuario/modificar")
-    Call<Usuario> modificarUsuario(@Body Usuario usuario);
+    Call<ModificarUsuario> modificarUsuario(@Body ModificarUsuario usuario);
 }

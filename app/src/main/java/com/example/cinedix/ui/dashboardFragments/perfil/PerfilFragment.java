@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.cinedix.R;
 import com.example.cinedix.common.Constantes;
 import com.example.cinedix.common.SharedPreferencesManager;
+import com.example.cinedix.models.entity.ModificarUsuario;
 import com.example.cinedix.models.entity.Usuario;
 import com.example.cinedix.retrofit.AuthUsuarioClient;
 import com.example.cinedix.retrofit.AuthUsuarioService;
@@ -128,26 +129,27 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
             etPerfilRepeatNewPassword.setError("Las contraseñas deben ser identicas!");
             return;
         } else {
-            Usuario nuevoUsuario = new Usuario();
+            ModificarUsuario nuevoUsuario = new ModificarUsuario();
             nuevoUsuario.setUsername(nombreUsuario);
-            nuevoUsuario.setPassword(newPassword);
+            nuevoUsuario.setOldPassword(oldPassword);
+            nuevoUsuario.setNewPassword(newPassword);
             nuevoUsuario.setEmail(email);
 
-            Call<Usuario> call = authUsuarioService.modificarUsuario(nuevoUsuario);
-            call.enqueue(new Callback<Usuario>() {
+            Call<ModificarUsuario> call = authUsuarioService.modificarUsuario(nuevoUsuario);
+            call.enqueue(new Callback<ModificarUsuario>() {
                 @Override
-                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                public void onResponse(Call<ModificarUsuario> call, Response<ModificarUsuario> response) {
                     if (response.isSuccessful()) {
                         SharedPreferencesManager
                                 .setSomeStringValue(Constantes.PREF_USERNAME, nuevoUsuario.getUsername());
                         Toast.makeText(getActivity(), "Usuario modificado correctamente!", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getActivity(), "Ha ocurrido un error inesperado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Ha ocurrido un error, comprueba tus datos por favor", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<Usuario> call, Throwable t) {
+                public void onFailure(Call<ModificarUsuario> call, Throwable t) {
                     Toast.makeText(getActivity(), "No tienes conexion a internet", Toast.LENGTH_SHORT).show();
                 }
             });
